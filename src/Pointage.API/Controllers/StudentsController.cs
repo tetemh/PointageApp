@@ -21,27 +21,11 @@ namespace Pointage.API.Controllers
         public async Task<IEnumerable<StudentDto>> GetAllStudents()
         {
             return await _studentRepository.GetAllStudents();
-            
         }
 
         [HttpGet("{id}")]
         public async Task<StudentDto?> GetStudentById(int id)
         {
-            var student = await _studentRepository.GetStudent(id);
-            if(student == null)
-            {
-                Response.StatusCode = 404;
-                return null;
-            }
-
-            return student;
-        }
-
-        [HttpPut("{id}/toggle-presence")]
-        public async Task<StudentDto?> TogglePresence(int id)
-        {
-            await _studentRepository.TogglePresenceStudent(id);
-
             var student = await _studentRepository.GetStudent(id);
             if(student == null)
             {

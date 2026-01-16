@@ -4,6 +4,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Pointage.Core.Dtos;
 using Pointage.Core.IRepositories;
 using Pointage.Infrastructure.Contexts;
+using Pointage.Infrastructure.Entities;
 using Pointage.Infrastructure.Repositories;
 
 namespace Pointage.DIExtension;
@@ -26,9 +27,9 @@ public static class DIExtension
             if (!db.Students.Any())
             {
                 db.Students.AddRange(
-                new StudentDto { Name = "Alice Liddell", IsPresent = false },
-                new StudentDto { Name = "Bob Marley", IsPresent = false },
-                new StudentDto { Name = "Charlie Brown", IsPresent = false }
+                new StudentEntity { Name = "Alice Liddell", IsPresent = false },
+                new StudentEntity { Name = "Bob Marley", IsPresent = false },
+                new StudentEntity { Name = "Charlie Brown", IsPresent = false }
                 );
                 db.SaveChanges();
             }

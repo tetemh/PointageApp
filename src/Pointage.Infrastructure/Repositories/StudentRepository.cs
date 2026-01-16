@@ -1,4 +1,5 @@
 using System;
+using Microsoft.EntityFrameworkCore;
 using Pointage.Core.Dtos;
 using Pointage.Core.IRepositories;
 using Pointage.Infrastructure.Contexts;
@@ -16,23 +17,39 @@ public class StudentRepository : IStudentRepository
         _context = context;
     }
 
-    public Task<IEnumerable<StudentDto>> GetAllStudents()
+    public async Task<IEnumerable<StudentDto>> GetAllStudents()
     {
-        throw new NotImplementedException();
+        return await _context.Students.Select(entity => new StudentDto
+        {
+            Id = entity.Id,
+            Name = entity.Name,
+            IsPresent = entity.IsPresent
+        }).ToListAsync();
     }
 
-    public Task<StudentDto> GetStudent(int id)
+    public async Task<StudentDto> GetStudent(int id)
     {
-        throw new NotImplementedException();
+        StudentEntity? student = await _context.Students.FindAsync(id);
+
+        if(student == null) throw new Exception("Student not found");
+
+        return new StudentDto
+        {
+            Id = student.Id,
+            Name = student.Name,
+            IsPresent = student.IsPresent
+        };
     }
 
     public Task SetPresenceStudent(int id, bool IsPresent)
     {
-        throw new NotImplementedException();
-    }
+        var entity = new StudentEntity
+        {
+            Id = id,
+            IsPresent = IsPresent
+        };
 
-    public Task TogglePresenceStudent(int id)
-    {
-        throw new NotImplementedException();
+        _context.Students.Update(entity);
+        return _context.SaveChangesAsync();
     }
 }
