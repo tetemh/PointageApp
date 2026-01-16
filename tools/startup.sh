@@ -1,0 +1,1 @@
+dotnet watch run --project ~/Documents/projets/StudentPresence/src/Pointage.API;

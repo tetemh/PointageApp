@@ -1,0 +1,6 @@
+<Solution>
+  <Project Path="Pointage.API/Pointage.API.csproj" />
+  <Project Path="Pointage.Core/Pointage.Core.csproj" />
+  <Project Path="Pointage.DIExtension/Pointage.DIExtension.csproj" />
+  <Project Path="Pointage.Infrastructure/Pointage.Infrastructure.csproj" />
+</Solution>
